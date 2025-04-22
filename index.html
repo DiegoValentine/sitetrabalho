@@ -3,27 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modo Escuro com 3 Eventos</title>
+    <title>Modo Escuro com Menu Responsivo</title>
     <style>
-        /* Modo Claro */
         body {
             background-color: #ffffff;
             color: #000000;
             font-family: Arial, sans-serif;
+            margin: 0;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Modo Escuro */
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
         }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body.dark-mode header {
+            background-color: #1e1e1e;
+        }
+
+        .menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            background: currentColor;
+            margin: 4px 0;
+            width: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        main {
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <button id="toggleButton">Alternar Modo Escuro</button>
-    <p>Pressione "D" para alternar o modo escuro.</p>
-    <p>Dê um <strong>duplo clique</strong> em qualquer lugar para alternar também.</p>
+    <header>
+        <div><strong>Meu Site</strong></div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu" id="menu">
+            <a href="#">Início</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <button id="toggleButton">Alternar Modo Escuro</button>
+        <p>Pressione "D" para alternar o modo escuro.</p>
+        <p>Dê um <strong>duplo clique</strong> em qualquer lugar para alternar também.</p>
+    </main>
 
     <script>
         // Alterna o modo escuro quando o botão é clicado
@@ -41,6 +112,11 @@
         // Alterna o modo escuro ao dar duplo clique em qualquer lugar da página
         document.addEventListener("dblclick", function() {
             document.body.classList.toggle("dark-mode");
+        });
+
+        // Alterna o menu responsivo
+        document.getElementById("menuToggle").addEventListener("click", function() {
+            document.getElementById("menu").classList.toggle("active");
         });
     </script>
 </body>
